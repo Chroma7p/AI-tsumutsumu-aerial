@@ -1,0 +1,50 @@
+services:
+  qdrant-db:
+    image: qdrant/qdrant:v1.9.1
+
+    volumes:
+      - qdrant_data:/qdrant/data  # Qdrantのデータディレクトリを永続化
+    environment:
+      - QDRANT__STORAGE__STORAGE_PATH=/qdrant/data # Qdrantのデータディレクトリを指定
+    ports:
+      - "6333:6333"
+    networks:
+      - db-net
+
+  postgres-db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - db-net
+    
+
+  bot:
+    build: ./bot
+    environment:
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN_PROD}
+      - APPLICATION_ID=${APPLICATION_ID_PROD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - QDRANT_HOST=qdrant-db
+      - QDRANT_PORT=6333
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - postgres-db
+      - qdrant-db
+    networks:
+      - db-net
+
+volumes:
+  postgres_data:
+  qdrant_data:
+networks:
+  db-net:
+    driver: bridge
