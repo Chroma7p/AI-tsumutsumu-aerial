@@ -1,0 +1,28 @@
+{
+    "type": "function",
+    "function": {
+        "name": "save_memory",
+        "description": "## save_memory \nこの機能は、私の記憶を保存するための機能です。引数は\n- `memory_name` : 保存する記憶の名前\n- `memory_content` : 保存する記憶の内容\n- `memory_type` : 保存する記憶の種類(任意、デフォルトは`other`)\n\n\n",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "memory_name": {
+                    "type": "string",
+                    "description": "保存する記憶の名前を入力してください"
+                },
+                "memory_content": {
+                    "type": "string",
+                    "description": "保存する記憶の内容を入力してください"
+                },
+                "memory_type": {
+                    "type": "string",
+                    "description": "保存する記憶の種類を入力してください"
+                }
+            },
+            "required": [
+                "memory_name",
+                "memory_content"
+            ]
+        }
+    }
+}
