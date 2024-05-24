@@ -41,6 +41,7 @@ services:
       - qdrant-db
     networks:
       - db-net
+    command: poetry run tox
 
 volumes:
   postgres_data:
