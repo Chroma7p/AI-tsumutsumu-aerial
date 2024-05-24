@@ -32,7 +32,7 @@ jobs:
         run: |
           docker-compose -f compose.ci.yml up -d
           docker-compose -f compose.ci.yml run --rm bot ls
-          docker-compose -f compose.ci.yml run --rm bot poetry run tox -c bot/tox.ini
+          docker-compose -f compose.ci.yml run --rm bot poetry run tox -c tox.ini
         env:
           CI: true
 
