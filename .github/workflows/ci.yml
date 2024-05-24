@@ -22,7 +22,7 @@ jobs:
       - name: Run Tox tests
         run: |
           docker-compose -f compose.ci.yml up -d
-          docker-compose -f compose.ci.yml run --rm ai-tsumutsumu-aerial-bot  tox
+          docker-compose -f compose.ci.yml run --rm bot  tox
         env:
           CI: true
 
