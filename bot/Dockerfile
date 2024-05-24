@@ -15,7 +15,7 @@ RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
 # Botのソースコードをコピー
-COPY bot/ ./bot/
+COPY src/ ./src/
 
 # Botを起動
-CMD ["poetry", "run", "python", "-u","bot/src/bot.py"]
+CMD ["poetry", "run", "python", "-u","src/bot.py"]
