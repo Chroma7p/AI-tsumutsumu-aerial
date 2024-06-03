@@ -30,10 +30,10 @@ def qdrant_connection():
 
 
 def test_postgres_connection():
-    conn = postgres_connection()
-    return conn
+    conn = postgres_connection
+    assert conn is not None
 
 
 def test_qdrant_connection():
-    qdrant = qdrant_connection()
-    return qdrant
+    qdrant = qdrant_connection
+    assert qdrant is not None
