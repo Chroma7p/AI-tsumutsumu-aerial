@@ -27,9 +27,6 @@ jobs:
       - name: Build Docker images
         run: docker-compose -f compose.ci.yml build
 
-      - name: Create Docker network
-        run: docker network create ci-network || true
-
       - name: Start services
         run: docker-compose -f compose.ci.yml up -d
 
