@@ -1,7 +1,9 @@
 name: CI
+
 on:
   push:
   pull_request:
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -11,6 +13,8 @@ jobs:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      QDRANT_HOST: qdrant-db
+      QDRANT_PORT: 6333
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
@@ -26,11 +30,18 @@ jobs:
       - name: Create Docker network
         run: docker network create ci-network || true
 
-      - name: Run Tox tests
+      - name: Start services
+        run: docker-compose -f compose.ci.yml up -d
+
+      - name: Wait for Postgres to be ready
         run: |
-          docker-compose -f compose.ci.yml up -d
-          docker-compose -f compose.ci.yml run --rm bot ls
-          docker-compose -f compose.ci.yml run --rm bot poetry run tox -c tox.ini
+          echo "Waiting for Postgres to be ready..."
+          until docker exec compose-cidb_postgres-db_1 pg_isready -U ${{ secrets.POSTGRES_USER }}; do
+            sleep 1
+          done
+
+      - name: Run Tox tests
+        run: docker-compose -f compose.ci.yml run --rm bot poetry run tox -c tox.ini
         env:
           CI: true
 
