@@ -1,6 +1,7 @@
 import psycopg2
 import qdrant_client
 import os
+import pytest
 
 db_settings = {
     'host': os.getenv('POSTGRES_HOST', 'localhost'),
@@ -11,19 +12,26 @@ db_settings = {
 }
 
 
-def test_postgres_connection():
+@pytest.fixture
+def postgres_connection():
     conn = psycopg2.connect(**db_settings)
-    cursor = conn.cursor()
-    cursor.execute("SELECT 1")
-    result = cursor.fetchone()
-    print(result)
-    cursor.close()
+    yield conn
     conn.close()
 
 
-def test_qdrant_connection():
+@pytest.fixture
+def qdrant_connection():
     qdrant = qdrant_client.QdrantClient(
         host=os.getenv('QDRANT_HOST', 'localhost'),
         port=os.getenv('QDRANT_PORT', '6333')
     )
+    yield qdrant
     qdrant.close()
+
+
+def test_postgres_connection():
+    conn = postgres_connection()
+
+
+def test_qdrant_connection():
+    qdrant = qdrant_connection()
