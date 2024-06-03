@@ -2,9 +2,6 @@ import psycopg2
 import qdrant_client
 import os
 
-from dotenv import load_dotenv
-load_dotenv("../.env", override=True)
-
 db_settings = {
     'host': os.getenv('POSTGRES_HOST', 'localhost'),
     'port': os.getenv('POSTGRES_PORT', '5432'),
