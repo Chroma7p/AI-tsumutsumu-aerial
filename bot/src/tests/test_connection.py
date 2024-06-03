@@ -31,7 +31,9 @@ def qdrant_connection():
 
 def test_postgres_connection():
     conn = postgres_connection()
+    return conn
 
 
 def test_qdrant_connection():
     qdrant = qdrant_connection()
+    return qdrant
