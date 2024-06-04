@@ -1,7 +1,9 @@
 name: CI
+
 on:
   push:
   pull_request:
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -25,14 +27,18 @@ jobs:
       - name: Build Docker images
         run: docker-compose -f compose.ci.yml build
 
-      - name: Create Docker network
-        run: docker network create ci-network || true
+      - name: Start services
+        run: docker-compose -f compose.ci.yml up -d
+
+      - name: Wait for Postgres to be ready
+        run: |
+          echo "Waiting for Postgres to be ready..."
+          until docker exec ai-tsumutsumu-aerial_postgres-db_1 pg_isready -U ${{ secrets.POSTGRES_USER }}; do
+            sleep 1
+          done
 
       - name: Run Tox tests
-        run: |
-          docker-compose -f compose.ci.yml up -d
-          docker-compose -f compose.ci.yml run --rm bot ls
-          docker-compose -f compose.ci.yml run --rm bot poetry run tox -c tox.ini
+        run: docker-compose -f compose.ci.yml run --rm bot poetry run tox -c tox.ini
         env:
           CI: true
 
