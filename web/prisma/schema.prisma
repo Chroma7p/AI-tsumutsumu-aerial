@@ -1,0 +1,40 @@
+datasource db {
+  provider = "postgresql" // または使用しているデータベースに合わせて変更してください
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Guild {
+  id        String      @id
+  name      String
+  info      String?
+  channels  Channel[]
+  UserGuild UserGuild[]
+}
+
+model Channel {
+  id      String  @id
+  name    String
+  info    String?
+  guildId String
+  guild   Guild   @relation(fields: [guildId], references: [id])
+}
+
+model User {
+  id        String      @id
+  name      String
+  info      String?
+  UserGuild UserGuild[]
+}
+
+model UserGuild {
+  userId  String
+  guildId String
+  user    User   @relation(fields: [userId], references: [id])
+  guild   Guild  @relation(fields: [guildId], references: [id])
+
+  @@id([userId, guildId])
+}
