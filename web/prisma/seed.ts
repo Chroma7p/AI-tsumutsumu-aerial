@@ -120,6 +120,18 @@ async function main() {
         ],
     });
 
+    // Create Emoji 
+    const emoji1 = await prisma.emoji.create({
+        data: {
+            id: 'emoji1',
+            name: 'smile',
+            info: 'Smile emoji',
+            guildId: guild1.id,
+        },
+    });
+
+
+
     console.log('Seeding completed.');
 }
 

@@ -8,7 +8,7 @@ WORKDIR /bot
 RUN pip install poetry
 
 # プロジェクトの依存ファイルをコピー
-COPY pyproject.toml poetry.lock tox.ini README.md ./
+COPY pyproject.toml poetry.lock tox.ini README.md schema.prisma ./
 
 # Poetryの設定を行い、依存関係をインストール
 RUN poetry config virtualenvs.create false \

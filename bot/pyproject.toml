@@ -15,6 +15,7 @@ tiktoken = "^0.6.0"
 tox = "^4.15.0"
 pytest = "^8.2.1"
 psycopg2-binary = "^2.9.9"
+prisma = "^0.13.1"
 
 
 [build-system]
