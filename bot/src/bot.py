@@ -4,6 +4,7 @@ import discord
 import os
 import asyncio
 from dotenv import load_dotenv
+from db_api import get_user_test
 
 load_dotenv(".env")
 
@@ -23,6 +24,7 @@ async def on_ready():
 
 
 async def main():
+    print(await get_user_test())
     # コグのフォルダ
     cog_folder = "cogs."
     # そして使用するコグの列挙(拡張子無しのファイル名)

@@ -4,10 +4,14 @@ import asyncio
 
 load_dotenv()
 
-async def main():
+
+async def get_user_test():
     prisma = Prisma()
     await prisma.connect()
-    user=await prisma.user.find_first()
-    print(user)
-    print(user.id)
+    user = await prisma.user.find_first()
     await prisma.disconnect()
+    return {
+        "id": user.id,
+        "name": user.name,
+        "user": user.info
+    }
