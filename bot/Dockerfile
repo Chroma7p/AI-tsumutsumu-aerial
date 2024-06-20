@@ -24,7 +24,7 @@ RUN poetry config virtualenvs.create true \
 COPY bot/src/ ./src/
 
 ARG GENERATOR_PROVIDER
-ARG DATABASE_URL
+ARG POSTGRES_URL
 
 ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
 

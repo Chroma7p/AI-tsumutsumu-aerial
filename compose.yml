@@ -30,7 +30,7 @@ services:
       dockerfile: bot/Dockerfile
       args:
         - GENERATOR_PROVIDER=prisma-client-py
-        - DATABASE_URL=${POSTGRES_URL}
+        - POSTGRES_URL=${POSTGRES_URL}
     environment:
       DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN_PROD}
       APPLICATION_ID: ${APPLICATION_ID_PROD}
@@ -40,7 +40,7 @@ services:
       QDRANT_HOST: qdrant-db
       QDRANT_PORT: 6333
       OPENAI_API_KEY: ${OPENAI_API_KEY}
-      DATABASE_URL: ${POSTGRES_URL}
+      POSTGRES_URL: ${POSTGRES_URL}
       GENERATOR_PROVIDER: prisma-client-py
     depends_on:
       - postgres-db
