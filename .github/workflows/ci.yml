@@ -13,6 +13,7 @@ jobs:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
       QDRANT_HOST: qdrant-db
       QDRANT_PORT: 6333
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
