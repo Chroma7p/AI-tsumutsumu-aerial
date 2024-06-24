@@ -8,4 +8,5 @@ echo "Postgres is up - executing command"
 
 # PrismaデータベースのプッシュとBotの起動
 poetry run prisma generate
+poetry run prisma migrate reset
 poetry run python -u src/bot.py 
