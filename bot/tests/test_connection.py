@@ -2,6 +2,7 @@ import psycopg2
 import qdrant_client
 import os
 import pytest
+from db_api import postgres_api
 
 db_settings = {
     'host': os.getenv('POSTGRES_HOST', 'localhost'),
@@ -37,3 +38,13 @@ def test_postgres_connection():
 def test_qdrant_connection():
     qdrant = qdrant_connection
     assert qdrant is not None
+
+
+def test_get_user():
+    user = postgres_api.get_user_test()
+    assert user is not None
+    assert user in 'id'
+    assert user in 'name'
+    assert user in 'user'
+
+
