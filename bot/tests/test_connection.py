@@ -2,8 +2,12 @@ import psycopg2
 import qdrant_client
 import os
 import pytest
-from db_api import postgres_api
+import sys
+import asyncio
 
+sys.path.append("./src")
+
+from db_api import postgres_api  # noqa
 db_settings = {
     'host': os.getenv('POSTGRES_HOST', 'localhost'),
     'port': os.getenv('POSTGRES_PORT', '5432'),
@@ -41,10 +45,9 @@ def test_qdrant_connection():
 
 
 def test_get_user():
-    user = postgres_api.get_user_test()
+    user = asyncio.run(postgres_api.get_user_test())
+    print(user)
     assert user is not None
-    assert user in 'id'
-    assert user in 'name'
-    assert user in 'user'
-
-
+    assert 'id' in user
+    assert 'name' in user
+    assert 'info' in user
