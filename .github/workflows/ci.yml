@@ -38,6 +38,9 @@ jobs:
             sleep 1
           done
 
+      - name: run seed.py
+        run: docker-compose -f compose.ci.yml run --rm bot poetry run python -u src/seed.py
+
       - name: Run Tox tests
         run: docker-compose -f compose.ci.yml run --rm bot poetry run tox -c tox.ini
         env:
