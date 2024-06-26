@@ -40,7 +40,7 @@ jobs:
       - name: run tests
         run: |
           docker-compose -f compose.ci.yml exec -T bot ls -la
-          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./bot/tests 
+          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ../tests 
         env:
           CI: true
 
