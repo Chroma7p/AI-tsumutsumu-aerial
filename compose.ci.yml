@@ -27,7 +27,7 @@ services:
   bot:
     build: 
       context: ./
-      dockerfile: bot/Dockerfile
+      dockerfile: bot/Dockerfile.ci
       args:
         - GENERATOR_PROVIDER=prisma-client-py
         - POSTGRES_URL=${POSTGRES_URL}
