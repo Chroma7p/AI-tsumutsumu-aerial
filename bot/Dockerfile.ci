@@ -16,17 +16,19 @@ RUN pip install poetry
 COPY bot/pyproject.toml bot/poetry.lock bot/tox.ini bot/README.md bot/wait-for-pg.sh ./
 RUN chmod +x ./wait-for-pg.sh
 
+
+WORKDIR /bot/src
 # Poetryの設定を行い、依存関係をインストール
 RUN poetry config virtualenvs.create true \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-interaction --no-ansi
-    
 
 # Botのソースコードをコピー
 COPY bot/src/ ./src/
 
+RUN poetry run prisma db push
+
 ARG GENERATOR_PROVIDER
 ARG POSTGRES_URL
 
-CMD [ "sh","-c","./wait-for-pg.sh" ]
 
