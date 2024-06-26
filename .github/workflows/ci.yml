@@ -37,6 +37,9 @@ jobs:
           until docker exec ai-tsumutsumu-aerial_postgres-db_1 pg_isready -U ${{ secrets.POSTGRES_USER }}; do
             sleep 1
           done
+      
+      - name: generate poetry environment
+        run: docker-compose -f compose.ci.yml exec -T bot poetry install
 
       - name: generate prisma client
         run: docker-compose -f compose.ci.yml exec -T bot poetry run prisma reset --force
