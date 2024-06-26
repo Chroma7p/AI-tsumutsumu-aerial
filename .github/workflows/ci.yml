@@ -38,6 +38,9 @@ jobs:
             sleep 1
           done
 
+      - name: generate prisma client
+        run: docker-compose -f compose.ci.yml exec -T bot poetry run prisma reset --force
+
       - name: run seed.py
         run: docker-compose -f compose.ci.yml exec -T bot poetry run python -u src/seed.py
 
