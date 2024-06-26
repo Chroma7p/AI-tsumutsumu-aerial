@@ -26,7 +26,7 @@ RUN poetry config virtualenvs.create true \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-interaction --no-ansi
 
-RUN poetry run prisma db push
+RUN ls -la && poetry run prisma db push
 
 ARG GENERATOR_PROVIDER
 ARG POSTGRES_URL
