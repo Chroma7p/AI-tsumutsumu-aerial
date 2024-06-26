@@ -38,7 +38,9 @@ jobs:
             sleep 1
           done
       - name: run tests
-        run: docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./bot/tests 
+        run: |
+          docker-compose -f compose.ci.yml exec -T bot ls -la
+          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./bot/tests 
         env:
           CI: true
 
