@@ -20,6 +20,7 @@ RUN chmod +x ./wait-for-pg.sh
 RUN poetry config virtualenvs.create true \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-interaction --no-ansi
+    
 
 # Botのソースコードをコピー
 COPY bot/src/ ./src/
@@ -27,5 +28,5 @@ COPY bot/src/ ./src/
 ARG GENERATOR_PROVIDER
 ARG POSTGRES_URL
 
-ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
+CMD [ "sh","-c","./wait-for-pg.sh" ]
 

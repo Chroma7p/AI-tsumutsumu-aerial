@@ -13,5 +13,5 @@ async def get_user_test():
     return {
         "id": user.id,
         "name": user.name,
-        "user": user.info
+        "info": user.info
     }
