@@ -19,7 +19,7 @@ RUN chmod +x ./wait-for-pg.sh
 
 # Botのソースコードをコピー
 COPY bot/src/ ./src/
-WORKDIR /bot/src
+
 
 # Poetryの設定を行い、依存関係をインストール
 RUN poetry config virtualenvs.create true \
