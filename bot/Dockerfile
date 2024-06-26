@@ -26,5 +26,5 @@ COPY bot/src/ ./src/
 ARG GENERATOR_PROVIDER
 ARG POSTGRES_URL
 
-# ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
+ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
 
