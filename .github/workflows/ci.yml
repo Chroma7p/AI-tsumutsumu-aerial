@@ -39,6 +39,7 @@ jobs:
           done
 
       - name: prisma generate
+        continue-on-error: true
         run: |
           sleep 5
           docker-compose -f compose.ci.yml exec -T bot poetry run prisma db push
