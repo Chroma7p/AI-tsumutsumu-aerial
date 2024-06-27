@@ -10,4 +10,6 @@ echo "Postgres is up - executing command"
 poetry run prisma db push
 poetry run python -u src/seed.py
 echo "Bot is up - executing command"
-poetry run python -u src/bot.py 
+do while true; do
+  sleep 100
+done
