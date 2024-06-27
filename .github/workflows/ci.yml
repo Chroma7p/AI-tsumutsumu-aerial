@@ -40,7 +40,7 @@ jobs:
 
       - name: run tests
         run: |
-          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests 
+          docker-compose -f compose.ci.yml exec bot poetry run pytest ./tests 
 
       - name: Shut down services
         run: docker-compose -f compose.ci.yml down
