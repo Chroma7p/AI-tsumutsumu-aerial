@@ -36,13 +36,11 @@ jobs:
 
       - name: prisma generate
         continue-on-error: true
-        run: |
-          docker-compose -f compose.ci.yml exec -T bot poetry run prisma db push
+        run: docker-compose -f compose.ci.yml exec -T bot poetry run prisma db push
 
       - name: run tests
         continue-on-error: true
-        run: |
-          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests
+        run: docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests
 
       - name: check docker logs
         run: |
