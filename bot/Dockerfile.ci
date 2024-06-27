@@ -3,7 +3,8 @@ FROM python:3.11-bookworm
 
 RUN apt-get update \
 && apt-get -y install netcat-traditional\
-&& apt-get -y install nodejs npm
+&& apt-get -y install nodejs npm\
+&& npm install -g prisma
 
 ARG GENERATOR_PROVIDER
 ARG POSTGRES_URL
