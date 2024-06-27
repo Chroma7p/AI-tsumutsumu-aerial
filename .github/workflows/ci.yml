@@ -40,7 +40,6 @@ jobs:
 
       - name: run tests
         run: |
-          docker-compose -f compose.ci.yml exec bot -T poetry run pytest
-
+          docker-compose -f compose.ci.yml exec -T ai-tsumutsumu-aerial_bot_1 poetry run pytest
       - name: Shut down services
         run: docker-compose -f compose.ci.yml down
