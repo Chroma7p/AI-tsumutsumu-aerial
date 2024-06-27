@@ -31,9 +31,11 @@ jobs:
       - name: Start services
         run: docker-compose -f compose.ci.yml up -d
 
+
       - name: Wait for containers to start
         run: |
           sleep 30
+          docker-compose -f compose.ci.yml ps
 
       - name: run tests
         continue-on-error: true
