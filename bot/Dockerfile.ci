@@ -32,4 +32,4 @@ RUN poetry config virtualenvs.create true \
 RUN echo "POSTGRES_URL=${POSTGRES_URL}" \
     && echo "GENERATOR_PROVIDER=${GENERATOR_PROVIDER}"
 
-CMD [ "sh","-c","poetry", "run", "prisma", "db","push"]
+ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
