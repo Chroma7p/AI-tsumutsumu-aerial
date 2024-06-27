@@ -30,5 +30,6 @@ RUN poetry config virtualenvs.create true \
     && poetry install --no-interaction --no-ansi
 
 RUN echo "POSTGRES_URL=${POSTGRES_URL}" \
-    && echo "GENERATOR_PROVIDER=${GENERATOR_PROVIDER}"\
-    && poetry run prisma db push
+    && echo "GENERATOR_PROVIDER=${GENERATOR_PROVIDER}"
+
+CMD [ "sh","-c","poetry", "run", "prisma", "db","push"]
