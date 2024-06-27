@@ -35,14 +35,17 @@ jobs:
         run: |
           sleep 30
           docker-compose -f compose.ci.yml exec -T bot echo "Bot is ready"
+        shell: bash
 
       - name: prisma generate
         continue-on-error: true
         run: docker-compose -f compose.ci.yml exec -T bot poetry run prisma db push
+        shell: bash
 
       - name: run tests
         continue-on-error: true
         run: docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests
+        shell: bash
 
       - name: check docker logs
         run: |
