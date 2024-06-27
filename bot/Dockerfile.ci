@@ -3,6 +3,9 @@ FROM python:3.11-bookworm
 
 RUN apt-get update && apt-get -y install netcat-traditional
 
+ARG GENERATOR_PROVIDER
+ARG POSTGRES_URL
+
 COPY bot/schema.prisma ./bot/schema.prisma
 COPY bot/tests ./bot/tests
 
@@ -26,9 +29,6 @@ RUN poetry config virtualenvs.create true \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-interaction --no-ansi
 
-RUN ls -la && poetry run prisma db push
-
-ARG GENERATOR_PROVIDER
-ARG POSTGRES_URL
-
-
+RUN echo "POSTGRES_URL=${POSTGRES_URL}" \
+    && echo "GENERATOR_PROVIDER=${GENERATOR_PROVIDER}"\
+    && poetry run prisma db push
