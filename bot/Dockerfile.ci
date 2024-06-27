@@ -31,8 +31,3 @@ COPY bot/src/ ./src/
 RUN poetry config virtualenvs.create true \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-interaction --no-ansi
-
-RUN echo "POSTGRES_URL=${POSTGRES_URL}" \
-    && echo "GENERATOR_PROVIDER=${GENERATOR_PROVIDER}"
-
-ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
