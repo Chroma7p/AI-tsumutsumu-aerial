@@ -46,7 +46,7 @@ jobs:
         continue-on-error: true
         run: |
           docker-compose -f compose.ci.yml exec -T bot poetry run ls -la
-          docker-compose -f compose.ci.yml exec -T bot poetry run pytest
+          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests
 
       - name: check docker logs
         run: |
