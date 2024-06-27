@@ -45,10 +45,12 @@ jobs:
       - name: run tests
         continue-on-error: true
         run: |
+          docker-compose -f compose.ci.yml exec -T bot poetry run ls -la
           docker-compose -f compose.ci.yml exec -T bot poetry run pytest
 
       - name: check docker logs
         run: |
+          
           docker-compose -f compose.ci.yml logs bot
       
       - name: Shut down services
