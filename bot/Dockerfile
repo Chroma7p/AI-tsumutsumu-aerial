@@ -5,6 +5,7 @@ RUN apt-get update && apt-get -y install netcat-traditional
 
 COPY bot/schema.prisma ./bot/schema.prisma
 
+
 # 作業ディレクトリを設定
 WORKDIR /bot
 
