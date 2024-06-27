@@ -43,6 +43,7 @@ jobs:
           docker-compose -f compose.ci.yml exec -T ai-tsumutsumu-aerial_bot_1 poetry run pytest
 
       - name: check docker logs
+        if : ${{ steps.run-tests.outcome == 'failure' }} 
         run: |
           docker-compose -f compose.ci.yml logs ai-tsumutsumu-aerial_bot_1
       
