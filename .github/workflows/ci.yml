@@ -40,14 +40,10 @@ jobs:
 
       - name: create prisma client python 
         run: |
-          docker-compose -f compose.ci.yml exec -T bot poetry run prisma db push
+          docker-compose -f compose.ci.yml exec -T bot poetry run prisma generate
         env:
           CI: true
 
-      - name: migrate prisma client python 
-        run: |
-          docker-compose -f compose.ci.yml exec -T bot poetry run prisma migrate reset --force
-          docker-compose -f compose.ci.yml exec -T bot poetry run python src/seed.py
       - name: run tests
         run: |
           docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests 
