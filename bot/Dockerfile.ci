@@ -31,5 +31,3 @@ COPY bot/src/ ./src/
 RUN poetry config virtualenvs.create true \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-interaction --no-ansi
-
-ENTRYPOINT [ "sh","-c","./wait-for-pg.sh" ]
