@@ -40,7 +40,7 @@ jobs:
 
       - name: create prisma client python 
         run: |
-          docker-compose -f compose.ci.yml exec -T bot poetry ls -la
+          docker-compose -f compose.ci.yml exec -T bot ls -la
           docker-compose -f compose.ci.yml exec -T bot poetry  install
           docker-compose -f compose.ci.yml exec -T bot poetry run prisma generate
         env:
