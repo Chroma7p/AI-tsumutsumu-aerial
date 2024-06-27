@@ -42,6 +42,7 @@ jobs:
         run: |
           docker-compose -f compose.ci.yml exec -T bot ls -la
           docker-compose -f compose.ci.yml exec -T bot poetry  install
+          docker-compose -f compose.ci.yml exec -T bot poetry run which prisma
           docker-compose -f compose.ci.yml exec -T bot poetry run prisma generate
         env:
           CI: true
