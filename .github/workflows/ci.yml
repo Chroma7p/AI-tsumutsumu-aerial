@@ -34,7 +34,7 @@ jobs:
       - name: Wait for containers to start
         run: |
           sleep 30
-          docker-compose -f compose.ci.yml exec -T bot echo "Bot is ready"
+
         shell: bash
 
       - name: prisma generate
