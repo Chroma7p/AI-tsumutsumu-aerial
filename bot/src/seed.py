@@ -133,9 +133,9 @@ async def main():
         },
     )
 
-    print('Seeding completed.')
-
     await prisma.disconnect()
 
 if __name__ == '__main__':
+    print('Seeding database...')
     asyncio.run(main())
+    print('Database seeded.')
