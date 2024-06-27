@@ -37,12 +37,15 @@ jobs:
           until docker exec ai-tsumutsumu-aerial_postgres-db_1 pg_isready -U ${{ secrets.POSTGRES_USER }}; do
             sleep 1
           done
-      - name: run tests
+
+      - name: create prisma client python 
         run: |
-          docker-compose -f compose.ci.yml exec -T bot ls -la
-          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests 
+          docker-compose -f compose.ci.yml exec -T bot poetry run prisma generate
         env:
           CI: true
+      - name: run tests
+        run: |
+          docker-compose -f compose.ci.yml exec -T bot poetry run pytest ./tests 
 
       - name: Shut down services
         run: docker-compose -f compose.ci.yml down
