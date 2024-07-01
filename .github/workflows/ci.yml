@@ -37,6 +37,12 @@ jobs:
           sleep 30
           docker compose -f compose.ci.yml ps
 
+      - name: prisma db push
+        run: docker compose -f compose.ci.yml exec -T bot poetry run prisma db push
+
+      - name: python src/seed.py
+        run: docker compose -f compose.ci.yml exec -T bot poetry run python -u src/seed.py
+
       - name: run tests
         run: docker compose -f compose.ci.yml exec -T bot poetry run pytest ./tests
 
